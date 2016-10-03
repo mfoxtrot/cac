@@ -13,24 +13,38 @@ function LunchCheckController($scope) {
 
   $scope.CheckTheList = function () {
 
-    var InputArray = $scope.InputList.split();
-    var InputArrayLength = InputArray.length;
+    var InputArray = [];
+    var InputArrayLength = 0;
 
-    $scope.message = InputArrayLength;
+    console.log($scope.InputList);
 
-    //if (InputArrayLength == 0) {
-    //  $scope.message = "Please enter data first";
-    //};
-    // else if ((InputArrayLength>=1) && (InputArrayLength<=3) ) {
-    //  $scope.message = "Enjoy!";
-    //} else {
-    //  $scope.message = "Too much!";
-    //};
+    if (($scope.InputList == "") || (typeof $scope.InputList == "undefined")) {
+        $scope.message = "Please enter data first";
+        $scope.OutputStyle = "has-error";
+    } else {
+      InputArray = $scope.InputList.split(',');
 
+      InputArrayLength = 0;
+
+      for(var i=0; i<InputArray.length; i++) {
+            if (InputArray[i] != "") {
+                InputArrayLength++
+            }
+        }
+
+      $scope.message = InputArrayLength;
+
+      if ((InputArrayLength>=1) && (InputArrayLength<=3) ) {
+        $scope.message = "Enjoy!";
+      } else {
+        $scope.message = "Too much!";
+      };
+    }
     console.log(InputArrayLength);
     console.log($scope.message);
     console.log($scope.InputList.split());
   };
+
 };
 
 })();
